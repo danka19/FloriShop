@@ -1,0 +1,33 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}
+Авторизация
+{% endblock %}
+
+{% block content %}
+
+
+    <div class="page-title" style="background-image: url({%static 'images/flowers.jpg'%})">
+        <div class="container">
+            <h1>Авторизация</h1>
+            <div class="polosonka">
+                <ul>
+                    <li><a href="{% url 'main:index'%}">Главная</a></li>
+                    <li><span>Войти</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <h1>Авторизация</h1>
+
+       <form class="form-korzina" method="post" >
+           <div class="inputs">
+               {% csrf_token %}
+               {{ form.as_p }}
+               <button type="submit" class="btn btn-success">Войти </button>
+           </div>
+       </form>
+
+{% endblock %}

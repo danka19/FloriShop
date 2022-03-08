@@ -1,0 +1,42 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}
+О нас
+{% endblock %}
+
+{% block content %}
+
+             <div class="page-title" style="background-image: url({%static 'images/flowers.jpg'%})">
+                <div class="container">
+                    <h1>О нас</h1>
+                    <div class="polosonka">
+                        <ul>
+                            <li><a href="{% url 'main:index'%}">Главная</a></li>
+                            <li><span>О нас</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+ <div class="container">
+                    <div class="row">
+                        <div class="col-md-9">
+
+                                <div class="our-team">
+                                    <h3 class="bottom-line">Контакты</h3>
+                                    <ul type="circle">
+                                        <li>Телефон: 8 (999) 999-99-99</li>
+                                        <li>Email: florishop@gmail.com</li>
+                                        <li>Адрес: ул. Карла Маркса, 59, Хабаровск, Хабаровский край, 680000</li>
+                                        <li>Время работы: с 9:00 утра до 22:00</li>
+                                    </ul>
+
+                                </div>
+
+                        </div>
+
+                        </div>
+                    </div>
+                </div>
+
+{% endblock %}

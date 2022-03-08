@@ -1,0 +1,56 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block title %}
+    {% if category %}{{ category.name }}{% else %}Products{% endif %}
+{% endblock %}
+{% block content %}
+
+    <div class="page-title" style="background-image: url({%static 'images/flowers.jpg'%})">
+        <div class="container">
+            <h1>Товары</h1>
+            <div class="polosonka">
+                <ul>
+                    <li><a href="{% url 'main:index'%}">Главная</a></li>
+                    <li><span>Товары</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class = "widget">
+        <h3 class = "widget-title" >Категории</h3>
+        <ul class = "widget-list">
+            <li {% if not category %} class="selected" {% endif %}>
+                <a href="{% url "main:product_list" %}">Все</a>
+            </li>
+            {% for c in categories %}
+                <li {% if category.slug == c.slug %}class="selected"{% endif %}>
+                    <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+
+    <h1>{% if category %}{{ category.name }}{% else %}Все товары{% endif %}</h1>
+
+    {% for product in products %}
+        <div class = "product-item">
+            <a href="{{ product.get_absolute_url }}">
+                <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" width="100%">
+            </a>
+            <div class="product-list">
+                <div class="info">
+                    <h3 href="{{ product.get_absolute_url }}">{{ product.name }}</h3><br>
+                </div>
+                <span class="price">
+                    {{ product.price }}
+                </span>
+            </div>
+        </div>
+    {% endfor %}
+
+
+{% endblock %}

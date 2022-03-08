@@ -1,0 +1,86 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block title %}
+    Ваша корзина
+{% endblock %}
+{% block content %}
+
+    <div class="page-title" style="background-image: url({%static 'images/flowers.jpg'%})">
+        <div class="container">
+            <h1>Ваша корзина</h1>
+            <div class="polosonka">
+                <ul>
+                    <li><a href="{% url 'main:index'%}">Главная</a></li>
+                    <li><span>Корзина</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <table class="korzina">
+        <thead>
+                <tr>
+                <th>Изображение</th>
+                <th>Товар</th>
+                <th>Количество</th>
+                <th>Удалить</th>
+                <th>Цена за штуку</th>
+                <th>Итоговая цена</th>
+            </tr>
+        </thead>
+        <tbody>
+
+
+
+
+                            {% for item in cart %}
+                                {% with product=item.product %}
+                                    <tr>
+                                        <td>
+                                            <a href="{{ product.get_absolute_url }}">
+                                                <div class="image">
+                                                    <img src="
+                                                        {% if product.image %}
+
+                                                        {{ product.image.url }}
+
+                                                        {% else %}
+                                                            {% static "img/no_image.png" %}
+                                                        {% endif %}" width="100%">
+                                                </div>
+                                                </a>
+                                        </td>
+                                        <div class="description">
+                                            <td>{{ product.name }}</td>
+                                        </div>
+                                        <div class="aspiration">
+                                            <td>{{ item.quantity }}</td>
+                                        </div>
+
+                                        <td><a href="{% url "cart:cart_remove" product.id%}">Удалить</a></td>
+                                        <td class="num">{{ item.price }}</td>
+                                        <td class="num">{{ item.total_price }}</td>
+                                    </tr>
+                                {% endwith %}
+                            {% endfor %}
+                            <tr class="total">
+                                <td>К оплате</td>
+                                <td colspan="4"></td>
+                                <td class="num">{{ cart.get_total_price }}</td>
+                            </tr>
+
+
+        </tbody>
+    </table>
+
+    <form  class="form-korzina">
+        <div class="inputs">
+            <p class="text-right">
+                <a href="{% url "main:product_list" %}" class="button light">Продолжить покупки</a>
+                <button class = "btn bnt-succsess" type="submit">Оформить заказ</button>
+            </p>
+        </div>
+    </form>
+
+{% endblock %}

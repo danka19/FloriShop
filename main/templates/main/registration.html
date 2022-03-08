@@ -1,0 +1,46 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}
+Регистрация
+{% endblock %}
+
+{% block content %}
+
+
+
+    <div class="page-title" style="background-image: url({%static 'images/flowers.jpg'%})">
+        <div class="container">
+            <h1>Регистрация</h1>
+            <div class="polosonka">
+                <ul>
+                    <li><a href="{% url 'main:index'%}">Главная</a></li>
+                    <li><span>Регистрация</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9">
+
+                <form class = "form-korzina" action = "{% url 'main:login' %}">
+                    <div class="inputs">
+                        <button > Вход</button>
+                    </div>
+                </form>
+
+                <form class="form-korzina" method="post">
+                    <div class="inputs">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-success">Зарегистрироваться </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
